@@ -1,0 +1,18 @@
+================================================================================
+ConfigModule                                                    *ConfigModule*
+
+
+    Fields: ~
+        {defaults} (Config)  default options
+        {options}  (Config)  config table extending defaults
+
+
+Config                                                                *Config*
+
+
+    Fields: ~
+        {round} (boolean)  round the result after calculation
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:
