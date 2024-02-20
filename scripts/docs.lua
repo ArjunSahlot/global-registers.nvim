@@ -7,7 +7,6 @@ docs.test = function()
   local input_files = {
     "./lua/global_registers/init.lua",
     "./lua/global_registers/config.lua",
-    "./lua/global_registers/math.lua",
   }
 
   -- Maybe sort them that depends what you want and need
