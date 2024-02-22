@@ -1,2 +1,2 @@
 # global-registers.nvim
-Copy and paste seamless between running neovim sessions!
+Copy and paste seamlessly between active neovim instances!
