@@ -35,7 +35,8 @@ global_registers.setup({options})                   *global_registers.setup()*
         pre_read_file = <function 4>,
         pre_write_file = <function 5>
       },
-      save_file = "/home/runner/.local/share/nvim/global_registers.txt",
+      on_load = false,
+      save_file = "/home/runner/.local/share/nvim/global_registers.json",
       update_event = { "ModeChanged", "RecordingLeave" }
     }
 
@@ -65,14 +66,16 @@ Config                                                                *Config*
 
 
     Fields: ~
-        {save_file}        (string)  path to the file where the global
-                                     registers will be saved
-        {global_registers} (table)   list of global registers
-        {update_event}     (table)   list of events that will trigger the
-                                     update of the global registers (includes
-                                     'time')
-        {hooks}            (table)   list of hooks to be called before and
-                                     after reading and writing files
+        {save_file}        (string)   path to the file where the global
+                                      registers will be saved, must be json
+        {global_registers} (table)    list of global registers
+        {update_event}     (table)    list of events that will trigger the
+                                      update of the global registers (includes
+                                      'time')
+        {hooks}            (table)    list of hooks to be called before and
+                                      after reading and writing files
+        {on_load}          (boolean)  if true, the global registers will be
+                                      loaded on plugin load
 
 
 
