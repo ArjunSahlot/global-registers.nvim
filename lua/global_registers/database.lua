@@ -13,6 +13,9 @@ M.get = function()
     end
     local content = file:read("*a")
     file:close()
+    if content == "" then
+        return {}
+    end
     return vim.fn.json_decode(content)
 end
 
