@@ -27,15 +27,15 @@ local config = require("global_registers.config").options
 ---@param options Config: config table
 ---@eval { ['description'] = require('global_registers.config').__format_keys() }
 global_registers.setup = function(options)
-    require("global_registers.config").__setup(options)
-    require("global_registers.handlers").setup()
+  require("global_registers.config").__setup(options)
+  require("global_registers.handlers").setup()
 end
 
 ---Output the save file path
 ---@return string
 global_registers.file = function()
-    local path = config.save_file
-    print("The global registers are saved at: " .. path)
+  local path = config.save_file
+  print("The global registers are saved at: " .. path)
 end
 
 return global_registers
