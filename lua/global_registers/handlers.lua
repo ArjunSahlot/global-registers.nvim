@@ -1,6 +1,5 @@
 local M = {}
 
-
 -- plan:
 -- 1. whenever user changes mode or leaves recording, update the global registers
 -- "ModeChanged", "RecordingLeave"
@@ -13,6 +12,9 @@ local M = {}
 local config = require("global_registers.config").options
 local utils = require("global_registers.utils")
 local db = require("global_registers.database")
+
+
+local changed = false
 
 
 local function registers_updated(registers)
@@ -44,10 +46,9 @@ local function update_db()
         end
         data[register] = info
     end
+    changed = true
     db.write(data)
 end
-
-M.update_db = update_db
 
 local function check_update()
     local data = db.get()
@@ -57,22 +58,14 @@ local function check_update()
 
     if registers_updated(data) then
         update_db()
-        print("Global registers updated")
     end
 end
 
 local function update_registers()
     local data = db.get()
-    print("p1")
     if data == nil then
         return
     end
-    print("p2")
-
-    if not registers_updated(data) then
-        return
-    end
-    print("p3")
 
     for _, register in ipairs(utils.vim_registers) do
         local info = data[register]
@@ -86,14 +79,10 @@ local function update_registers()
         else
             info.regcontents = vim.api.nvim_replace_termcodes(info.regcontents, true, true, true)
         end
-        print("Setting register " .. register)
         vim.fn.setreg(register, info)
         ::continue::
     end
-    print("Local registers updated")
 end
-
-M.update_registers = update_registers
 
 local function watch_file()
     local uv = vim.loop
@@ -108,7 +97,7 @@ local function watch_file()
         utils.error("Error creating file update event")
         return
     end
-    uv.fs_event_start(handle, config.save_file, flags, function(err, fname, _)
+    uv.fs_event_start(handle, config.save_file, flags, function(err, _, _)
         if err then
             vim.schedule(function()
                 utils.error("Error in file update event: " .. err)
@@ -116,8 +105,11 @@ local function watch_file()
             return
         end
 
-        print("File updated: " .. fname)
-        vim.schedule(update_registers)
+        if changed then
+            changed = false
+        else
+            vim.schedule(update_registers)
+        end
         uv.fs_event_stop(handle)
         watch_file()
     end)
@@ -125,15 +117,15 @@ end
 
 
 M.setup = function()
-    -- local group = vim.api.nvim_create_augroup("global_registers", { clear = true })
-    -- vim.api.nvim_create_autocmd("ModeChanged", {
-    --     group = group,
-    --     callback = check_update,
-    -- })
-    -- vim.api.nvim_create_autocmd("RecordingLeave", {
-    --     group = group,
-    --     callback = check_update,
-    -- })
+    local group = vim.api.nvim_create_augroup("global_registers", { clear = true })
+    vim.api.nvim_create_autocmd("ModeChanged", {
+        group = group,
+        callback = check_update,
+    })
+    vim.api.nvim_create_autocmd("RecordingLeave", {
+        group = group,
+        callback = check_update,
+    })
     watch_file()
 end
 
