@@ -28,6 +28,7 @@ global_registers.setup = function(options)
 
   if require("global_registers.config").options.on_load then
     require("global_registers.handlers").setup()
+    require("global_registers.handlers").update_registers()
   end
 end
 

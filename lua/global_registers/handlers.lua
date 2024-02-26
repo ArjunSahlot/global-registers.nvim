@@ -5,6 +5,8 @@ local utils = require("global_registers.utils")
 local db = require("global_registers.database")
 
 local changed = false
+local exiting = false
+local writing = false
 
 local function registers_updated(registers)
   for _, register in ipairs(config.global_registers) do
@@ -108,13 +110,28 @@ end
 M.setup = function()
   local group = vim.api.nvim_create_augroup("global_registers", { clear = true })
 
+  vim.api.nvim_create_autocmd("VimLeavePre", {
+    group = group,
+    callback = function()
+      exiting = true
+    end
+  })
+
   for _, event in ipairs(config.update_event) do
     vim.api.nvim_create_autocmd(event, {
       group = group,
-      callback = check_update,
+      callback = function()
+        vim.defer_fn(function()
+          if not exiting then
+            check_update()
+          end
+        end, 10)
+      end
     })
   end
   watch_file()
 end
+
+M.update_registers = update_registers
 
 return M

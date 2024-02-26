@@ -16,7 +16,7 @@ M.defaults = {
     post_read_file = function(_) end,
     on_change = function(_) end,
   },
-  on_load = false,
+  on_load = true,
 }
 
 ---@class Config
