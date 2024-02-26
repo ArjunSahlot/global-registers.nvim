@@ -1,9 +1,17 @@
-# global-registers.nvim
+# global-registers.nvim 🌐🔗📋
 Copy and paste seamlessly between active neovim instances!
 
 `global-registers.nvim` is a neovim plugin that allows you to share your registers between all your neovim instances. This means that you can copy some text in one neovim instance, and paste it seamlessly into another neovim instance! **Everything works as you expect it to!**
 
-## Install & Configure
+## Features ✨
+
+* 🔄 Seamless Register Sharing: Instantly sync your clipboard across multiple Neovim instances, making your workflow more efficient and unified.
+* 💾 Persistent Registers: Automatically saves register states to a JSON file, ensuring you can pick up right where you left off, even across sessions.
+* 🔌 Automatic: Works out of the box with minimal configuration needed, integrating silently into your workflow without manual intervention.
+* 🛠️ Easy Setup & Customization: Get started quickly with minimal setup and tailor the plugin to your needs with advanced configuration options.
+
+
+## Install & Configure 📦
 
 ### Minimal
 
@@ -79,17 +87,17 @@ Copy and paste seamlessly between active neovim instances!
 ```
 
 
-## Usage
+## Usage 🚀
 
 `global-registers.nvim` was built to be as unobtrusive as possible. Press `yy` here, press `p` there. Press `qq` here, press `@q` there. It just works! Think of it as a missing feature that should have been built into `neovim` from the start. Once you start using it, you won't even know it exists!
 
 
-## Behind the scenes (how it works)
+## Behind the scenes (how it works) 🔍
 
-In order to have the same registers across all your neovim instances, `global-registers.nvim` has to keep track of all the (configured) registers in a file. Whenever you edit these registers in a local instance of neovim, it will update the save file. Whenever other neovim instances detect a change in the save file, they will refresh their own registers to match the save file.
+In order to have the same registers across all your neovim instances, `global-registers.nvim` has to keep track of all the (configured) registers in a file. Whenever you edit these registers in a local instance of neovim, it will update the save file. Whenever other neovim instances detect a change in the save file, they will refresh their own registers to match the save file. Because of the save file, this plugin can actually double-up as a register persistency plugin!
 
 
-## Troubleshooting
+## Troubleshooting 🛠️
 
 `global-registers.nvim` tries to do things which neovim doesn't provide native support for, such as tracking register changes. This means that there are some edge cases where it might not work as expected. If you're experiencing any issues, please check this section and open an issue if you don't find a solution.
 
@@ -98,14 +106,14 @@ In order to have the same registers across all your neovim instances, `global-re
 If you're experiencing hangs when exiting neovim, try increasing the `lag` value in the configuration. This is the time (milliseconds) that `global-registers.nvim` will wait before writing to the global registers file. This is to prevent writing to the save file while neovim is exiting, which will create a hangup.
 
 
-## Contributing
+## Contributing 👐
 
 Contributions are not only welcome, but encouraged! I'm rather new to neovim plugin development, so I'm sure there are many ways to improve this plugin. If you have any ideas, feel free to open an issue or a pull request!
 
 If you do plan on contributing, I have added how the project is structured below. This should help you understand the codebase and make it easier for you to contribute.
 
 
-### Project structure
+### Project structure 📂
 
 #### GitHub Workflows
 
