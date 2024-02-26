@@ -6,7 +6,6 @@ local db = require("global_registers.database")
 
 local changed = false
 local exiting = false
-local writing = false
 
 local function registers_updated(registers)
   for _, register in ipairs(config.global_registers) do
@@ -114,7 +113,7 @@ M.setup = function()
     group = group,
     callback = function()
       exiting = true
-    end
+    end,
   })
 
   for _, event in ipairs(config.update_event) do
@@ -126,7 +125,7 @@ M.setup = function()
             check_update()
           end
         end, config.lag)
-      end
+      end,
     })
   end
   watch_file()
