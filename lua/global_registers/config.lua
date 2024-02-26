@@ -17,6 +17,7 @@ M.defaults = {
     on_change = function(_) end,
   },
   on_load = true,
+  lag = 50,
 }
 
 ---@class Config
@@ -25,6 +26,7 @@ M.defaults = {
 ---@field update_event table: list of events that will trigger the update of the global registers (includes 'time')
 ---@field hooks table: list of hooks to be called before and after reading and writing files
 ---@field on_load boolean: if true, the global registers will be loaded on plugin load
+---@field lag number: time in milliseconds to wait before updating the save file, useful to avoid neovim hanging on exit
 M.options = {}
 
 --- Setup options by extending defaults with the options proveded by the user

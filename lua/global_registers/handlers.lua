@@ -125,7 +125,7 @@ M.setup = function()
           if not exiting then
             check_update()
           end
-        end, 10)
+        end, config.lag)
       end
     })
   end
