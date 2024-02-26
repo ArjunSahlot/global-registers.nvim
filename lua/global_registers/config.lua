@@ -10,11 +10,11 @@ M.defaults = {
   global_registers = { "*" },
   update_event = { "ModeChanged", "RecordingLeave" },
   hooks = {
-    pre_write_file = function() end,
-    post_write_file = function() end,
+    pre_write_file = function(_) end,
+    post_write_file = function(_) end,
     pre_read_file = function() end,
-    post_read_file = function() end,
-    on_change = function() end,
+    post_read_file = function(_) end,
+    on_change = function(_) end,
   },
   on_load = false,
 }

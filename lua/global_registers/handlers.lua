@@ -16,7 +16,7 @@ local db = require("global_registers.database")
 local changed = false
 
 local function registers_updated(registers)
-  for _, register in ipairs(utils.vim_registers) do
+  for _, register in ipairs(config.global_registers) do
     local current = vim.fn.getreg(register)
     local saved = registers[register]
     if current ~= saved then
@@ -28,7 +28,7 @@ end
 
 local function update_db()
   local data = {}
-  for _, register in ipairs(utils.vim_registers) do
+  for _, register in ipairs(config.global_registers) do
     local info = vim.fn.getreginfo(register)
     if info.regcontents == nil then
       info = {
@@ -55,6 +55,7 @@ local function check_update()
   end
 
   if registers_updated(data) then
+    config.hooks.on_change(data)
     update_db()
   end
 end
@@ -65,7 +66,7 @@ local function update_registers()
     return
   end
 
-  for _, register in ipairs(utils.vim_registers) do
+  for _, register in ipairs(config.global_registers) do
     local info = data[register]
     if info == nil then
       goto continue
@@ -115,14 +116,13 @@ end
 
 M.setup = function()
   local group = vim.api.nvim_create_augroup("global_registers", { clear = true })
-  vim.api.nvim_create_autocmd("ModeChanged", {
-    group = group,
-    callback = check_update,
-  })
-  vim.api.nvim_create_autocmd("RecordingLeave", {
-    group = group,
-    callback = check_update,
-  })
+
+  for _, event in ipairs(config.update_event) do
+      vim.api.nvim_create_autocmd(event, {
+        group = group,
+        callback = check_update,
+      })
+  end
   watch_file()
 end
 

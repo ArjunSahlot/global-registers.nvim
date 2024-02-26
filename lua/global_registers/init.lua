@@ -18,24 +18,17 @@
 
 ---@class GlobalRegistersModule
 ---@field setup function: setup the plugin
----@field file function: output the save file path
 local global_registers = {}
-
-local config = require("global_registers.config").options
 
 --- Setup the plugin
 ---@param options Config: config table
 ---@eval { ['description'] = require('global_registers.config').__format_keys() }
 global_registers.setup = function(options)
   require("global_registers.config").__setup(options)
-  require("global_registers.handlers").setup()
-end
 
----Output the save file path
----@return string
-global_registers.file = function()
-  local path = config.save_file
-  print("The global registers are saved at: " .. path)
+  if require("global_registers.config").options.on_load then
+    require("global_registers.handlers").setup()
+  end
 end
 
 return global_registers
