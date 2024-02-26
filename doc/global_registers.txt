@@ -19,7 +19,6 @@ GlobalRegistersModule                                  *GlobalRegistersModule*
 
     Fields: ~
         {setup} (function)  setup the plugin
-        {file}  (function)  output the save file path
 
 
 global_registers.setup({options})                   *global_registers.setup()*
@@ -42,14 +41,6 @@ global_registers.setup({options})                   *global_registers.setup()*
 
     Parameters: ~
         {options} (Config)  config table
-
-
-global_registers.file()                              *global_registers.file()*
-    Output the save file path
-
-
-    Return: ~
-        string
 
 
 
