@@ -118,10 +118,10 @@ M.setup = function()
   local group = vim.api.nvim_create_augroup("global_registers", { clear = true })
 
   for _, event in ipairs(config.update_event) do
-      vim.api.nvim_create_autocmd(event, {
-        group = group,
-        callback = check_update,
-      })
+    vim.api.nvim_create_autocmd(event, {
+      group = group,
+      callback = check_update,
+    })
   end
   watch_file()
 end
