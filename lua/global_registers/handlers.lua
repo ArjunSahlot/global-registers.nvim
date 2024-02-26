@@ -1,14 +1,5 @@
 local M = {}
 
--- plan:
--- 1. whenever user changes mode or leaves recording, update the global registers
--- "ModeChanged", "RecordingLeave"
--- vim.fn.getreginfo({register})
--- vim.fn.setreg({register}, {text}, {linewise})
--- vim.fn.getreg({register})
--- 2. every time designated file gets updated, update the global registers
--- https://neovim.io/doc/user/lua.html#vim.uv
-
 local config = require("global_registers.config").options
 local utils = require("global_registers.utils")
 local db = require("global_registers.database")
