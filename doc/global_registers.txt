@@ -34,6 +34,7 @@ global_registers.setup({options})                   *global_registers.setup()*
         pre_read_file = <function 4>,
         pre_write_file = <function 5>
       },
+      lag = 50,
       on_load = true,
       save_file = "/home/runner/.local/share/nvim/global_registers.json",
       update_event = { "ModeChanged", "RecordingLeave" }
@@ -67,6 +68,9 @@ Config                                                                *Config*
                                       after reading and writing files
         {on_load}          (boolean)  if true, the global registers will be
                                       loaded on plugin load
+        {lag}              (number)   time in milliseconds to wait before
+                                      updating the save file, useful to avoid
+                                      neovim hanging on exit
 
 
 
