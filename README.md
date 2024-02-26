@@ -124,19 +124,14 @@ If you do plan on contributing, I have added how the project is structured below
 * `plugin/global_registers.lua`
     * This is the main file that is sourced by neovim. It calls the setup function. Doesn't need to be changed.
 * `lua/global_registers/`
-    * `init.lua`
-    <br>
+    * `init.lua`:
     Contains the setup function, which loads configuration and sets up handlers if `on_load` is true.
-    * `config.lua`
-    <br>
+    * `config.lua`:
     Configuration file. This is where the default configuration is set and the user configuration is merged with the default configuration.
-    * `handlers.lua`
-    <br>
+    * `handlers.lua`:
     This file contains the bulk of the code. It sets up the handlers that listen for register changes and also save file changes, it even updates local registers. Think of this as a file that handles and interfaces with everything.
-    * `utils.lua`
-    <br>
+    * `utils.lua`:
     Utility things. List of vim registers for `{ "*" }` (all register configuration) and error function for now.
-    * `database.lua`
-    <br>
+    * `database.lua`:
     This file contains the functions that interface with the save file ("database"). It can read and write to the save file.
 
