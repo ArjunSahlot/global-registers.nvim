@@ -34,7 +34,7 @@ global_registers.setup({options})                   *global_registers.setup()*
         pre_read_file = <function 4>,
         pre_write_file = <function 5>
       },
-      on_load = false,
+      on_load = true,
       save_file = "/home/runner/.local/share/nvim/global_registers.json",
       update_event = { "ModeChanged", "RecordingLeave" }
     }
