@@ -3,6 +3,9 @@ Copy and paste seamlessly between active neovim instances!
 
 `global-registers.nvim` is a neovim plugin that allows you to share your registers between all your neovim instances. This means that you can copy some text in one neovim instance, and paste it seamlessly into another neovim instance! **Everything works as you expect it to!**
 
+# NOTE: This plugin currently works but raises some errors which are annoying to deal with. Still under (slow) development. Help appreciated.
+
+
 ## Features ✨
 
 * 🔄 Seamless Register Sharing: Instantly sync your clipboard across multiple Neovim instances, making your workflow more efficient and unified.
